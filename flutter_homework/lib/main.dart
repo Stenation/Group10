@@ -9,10 +9,31 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      home: Scaffold(backgroundColor: Colors.blue,
         body: Center(
-          child: Text('Hello World!'),
+          child: SizedBox(height: 400,width: 1000, 
+              child: Column(
+                children: [
+                  Expanded(flex: 5, child: Container(color: Colors.white)),
+                  Expanded(flex: 5, child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(flex: 3,
+                        child: Align(alignment: Alignment.centerRight, 
+                          child: Text ("Login: ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),),
+                      Expanded(flex: 5, child: TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Enter your username',
+                        ),
+                      )),
+                    ],
+                  )),
+                  Expanded(flex: 5, child: Container(color: Colors.purple)),
+                  Expanded(flex: 5, child: Container(color: Colors.green)),
+                ],
+              ),
+          ),
         ),
       ),
     );
