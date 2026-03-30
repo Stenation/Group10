@@ -6,48 +6,66 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Center(
-        child: SizedBox(
-          height: 400,
-          width: 1000,
-          child: Column(
-            children: [
-              Expanded(flex: 5, child: Container(color: Colors.white)),
-              Expanded(
-                flex: 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "Login: ",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Enter your username',
-                        ),
-                      ),
-                    ),
-                  ],
+      backgroundColor: const Color.fromARGB(255, 201, 212, 222),
+      body: Padding(
+        padding: EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            /*             
+            Logo here 
+            */
+
+            // Username field
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your username',
+              ),
+            ),
+
+            SizedBox(height: 8),
+
+            // Password field
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Enter your password',
+              ),
+            ),
+
+            SizedBox(height: 16),
+
+            /* 
+            Remember me Checkbox here
+            */
+
+            // Login Button
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle login
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 3, 29, 49),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Expanded(flex: 5, child: Container(color: Colors.purple)),
-              Expanded(flex: 5, child: Container(color: Colors.green)),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
