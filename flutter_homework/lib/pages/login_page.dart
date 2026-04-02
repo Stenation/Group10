@@ -15,6 +15,9 @@ class LoginPage extends StatelessWidget {
             /*             
             Logo here 
             */
+            Image.asset('assets/images/logo.png', width: 200, height: 200),
+
+            SizedBox(height: 60),
 
             // Username field
             TextField(
