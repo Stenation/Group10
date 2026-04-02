@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+  
+}
+
+class _LoginPageState extends State<LoginPage>{
+  bool? value = true;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +47,19 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 16),
 
             /* 
-            Remember me Checkbox here
-            */
+            Remember me Checkbox here*/
+            
+            CheckboxListTile(
+              title: Text("Remember me"),
+              value: value,
+              onChanged: (newValue) {
+                setState(() {
+                  value = newValue;
+                });
+              },
+              controlAffinity: ListTileControlAffinity.leading,
+            ),
+            
 
             // Login Button
             SizedBox(
