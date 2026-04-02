@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage>{
             /*             
             Logo here 
             */
-            Image.asset('assets/images/logo.png', width: 200, height: 200),
+            Image.asset('assets/images/joint_logo.png', width: 300),
 
             SizedBox(height: 60),
 
@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage>{
               ),
             ),
 
-            SizedBox(height: 8),
+            SizedBox(height: 16),
 
             // Password field
             TextField(
@@ -60,6 +60,7 @@ class _LoginPageState extends State<LoginPage>{
               controlAffinity: ListTileControlAffinity.leading,
             ),
             
+            SizedBox(height: 16),
 
             // Login Button
             SizedBox(
@@ -70,7 +71,8 @@ class _LoginPageState extends State<LoginPage>{
                   // Handle login
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 3, 29, 49),
+                  backgroundColor: Color(0xffff6a00),
+
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
