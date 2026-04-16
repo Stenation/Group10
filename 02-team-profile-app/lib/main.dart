@@ -64,10 +64,10 @@ class _TeamPageState extends State<TeamPage> {
       image: 'assets/images/member5.png',
     ),
     const TeamMember(
-      name: 'Member 6',
-      country: 'Dreamland',
-      hobbies: 'Dancing',
-      image: 'assets/images/member6.png',
+      name: 'Michał',
+      country: 'Poland',
+      hobbies: 'Coding, Sleeping',
+      image: 'assets/images/member6.jpg',
     ),
     const TeamMember(
       name: 'Member 7',
