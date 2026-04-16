@@ -1,83 +1,75 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+import 'models/team_member.dart';
+import 'widgets/member_navigation_controls.dart';
+import 'widgets/member_profile_card.dart';
+
 void main() {
-  runApp(MyApp());
-}
-
-class TeamMember {
-  final String name;
-  final String country;
-  final String hobbies;
-  final String image;
-
-  TeamMember({
-    required this.name,
-    required this.country,
-    required this.hobbies,
-    required this.image,
-  });
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Team Profile App',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
+      theme: ThemeData(primarySwatch: Colors.indigo),
       home: TeamPage(),
     );
   }
 }
 
 class TeamPage extends StatefulWidget {
+  const TeamPage({super.key});
+
   @override
-  _TeamPageState createState() => _TeamPageState();
+  State<TeamPage> createState() => _TeamPageState();
 }
 
 class _TeamPageState extends State<TeamPage> {
   int currentIndex = 0;
 
   final List<TeamMember> members = [
-    TeamMember(
+    const TeamMember(
       name: 'Valeriia',
       country: 'Russia',
       hobbies: 'Reading, Bachata',
       image: 'assets/images/member1.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 2',
       country: 'Spain',
       hobbies: 'Programming',
       image: 'assets/images/member2.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 3',
       country: 'Dreamland',
       hobbies: 'Photography',
       image: 'assets/images/member3.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 4',
       country: 'Dreamland',
       hobbies: 'Gaming',
       image: 'assets/images/member4.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 5',
       country: 'Dreamland',
       hobbies: 'Drawing',
       image: 'assets/images/member5.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 6',
       country: 'Dreamland',
       hobbies: 'Dancing',
       image: 'assets/images/member6.png',
     ),
-    TeamMember(
+    const TeamMember(
       name: 'Member 7',
       country: 'Dreamland',
       hobbies: 'Hiking',
@@ -97,33 +89,12 @@ class _TeamPageState extends State<TeamPage> {
     });
   }
 
-  Widget buildAvatar(String imagePath, {double size = 120}) {
-    return ClipOval(
-      child: Image.asset(
-        imagePath,
-        width: size,
-        height: size,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return Image.asset(
-            'assets/images/default.png',
-            width: size,
-            height: size,
-            fit: BoxFit.cover,
-          );
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final member = members[currentIndex];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Team Profile App'),
-      ),
+      appBar: AppBar(title: Text('Team Profile App')),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final orientation = MediaQuery.of(context).orientation;
@@ -135,7 +106,10 @@ class _TeamPageState extends State<TeamPage> {
               : min(constraints.maxWidth * 0.8, 600.0);
 
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 10.0,
+            ),
             child: orientation == Orientation.portrait
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -161,76 +135,28 @@ class _TeamPageState extends State<TeamPage> {
                             maxWidth: cardWidth,
                             maxHeight: cardHeight,
                           ),
-                          child: Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  buildAvatar(member.image),
-                                  SizedBox(width: 24),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          member.name,
-                                          style: TextStyle(
-                                            fontSize: 26,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SizedBox(height: 10),
-                                        Text(
-                                          'Home country: ${member.country}',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.grey[800],
-                                          ),
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Hobbies: ${member.hobbies}',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.grey[800],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          child: MemberProfileCard(
+                            member: member,
+                            avatarSize: 120,
+                            contentPadding: const EdgeInsets.all(20.0),
+                            nameFontSize: 26,
+                            bodyFontSize: 16,
+                            memberSpacing: 24,
+                            textSpacing: 8,
                           ),
                         ),
                       ),
 
                       SizedBox(height: 28),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                            onPressed: previousMember,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                              child: Text('←', style: TextStyle(fontSize: 18)),
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: nextMember,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                              child: Text('→', style: TextStyle(fontSize: 18)),
-                            ),
-                          ),
-                        ],
+                      MemberNavigationControls(
+                        onPrevious: previousMember,
+                        onNext: nextMember,
+                        buttonPadding: const EdgeInsets.symmetric(
+                          horizontal: 18.0,
+                          vertical: 10.0,
+                        ),
+                        fontSize: 18,
                       ),
                     ],
                   )
@@ -239,7 +165,10 @@ class _TeamPageState extends State<TeamPage> {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsets.only(left: 50.0, right: 16.0),
+                          padding: const EdgeInsets.only(
+                            left: 50.0,
+                            right: 16.0,
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,76 +203,28 @@ class _TeamPageState extends State<TeamPage> {
                                   maxWidth: cardWidth,
                                   maxHeight: cardHeight,
                                 ),
-                                child: Card(
-                                  elevation: 10,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        buildAvatar(member.image, size: 100),
-                                        SizedBox(width: 20),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                member.name,
-                                                style: TextStyle(
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              SizedBox(height: 8),
-                                              Text(
-                                                'Home country: ${member.country}',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey[800],
-                                                ),
-                                              ),
-                                              SizedBox(height: 6),
-                                              Text(
-                                                'Hobbies: ${member.hobbies}',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.grey[800],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                child: MemberProfileCard(
+                                  member: member,
+                                  avatarSize: 100,
+                                  contentPadding: const EdgeInsets.all(16.0),
+                                  nameFontSize: 22,
+                                  bodyFontSize: 14,
+                                  memberSpacing: 20,
+                                  textSpacing: 6,
                                 ),
                               ),
                             ),
 
                             SizedBox(height: 20),
 
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: previousMember,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                                    child: Text('←', style: TextStyle(fontSize: 16)),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  onPressed: nextMember,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                                    child: Text('→', style: TextStyle(fontSize: 16)),
-                                  ),
-                                ),
-                              ],
+                            MemberNavigationControls(
+                              onPrevious: previousMember,
+                              onNext: nextMember,
+                              buttonPadding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 8.0,
+                              ),
+                              fontSize: 16,
                             ),
                           ],
                         ),
