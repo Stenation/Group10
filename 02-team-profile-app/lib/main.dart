@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'models/team_member.dart';
@@ -70,9 +71,9 @@ class _TeamPageState extends State<TeamPage> {
       image: 'assets/images/member6.jpg',
     ),
     const TeamMember(
-      name: 'Member 7',
-      country: 'Dreamland',
-      hobbies: 'Hiking',
+      name: 'Olive Schilde',
+      country: 'Finland',
+      hobbies: 'Mobile app development course',
       image: 'assets/images/member7.png',
     ),
   ];
