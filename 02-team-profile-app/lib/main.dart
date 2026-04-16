@@ -52,10 +52,10 @@ class _TeamPageState extends State<TeamPage> {
       image: 'assets/images/member3.png',
     ),
     const TeamMember(
-      name: 'Member 4',
-      country: 'Dreamland',
-      hobbies: 'Gaming',
-      image: 'assets/images/member4.png',
+      name: 'Sariph',
+      country: 'Nepal',
+      hobbies: 'Playing guitar and sports',
+      image: 'assets/images/member4.jpg',
     ),
     const TeamMember(
       name: 'Member 5',
