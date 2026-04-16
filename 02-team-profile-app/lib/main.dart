@@ -58,9 +58,9 @@ class _TeamPageState extends State<TeamPage> {
       image: 'assets/images/member4.jpg',
     ),
     const TeamMember(
-      name: 'Member 5',
-      country: 'Dreamland',
-      hobbies: 'Drawing',
+      name: 'Abhay',
+      country: 'Nepal',
+      hobbies: 'Sports, Chess, Guitar',
       image: 'assets/images/member5.png',
     ),
     const TeamMember(
