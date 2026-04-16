@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Team Profile App',
-      theme: ThemeData(primarySwatch: Colors.indigo),
-      home: TeamPage(),
+      theme: ThemeData(colorSchemeSeed: Colors.grey, useMaterial3: true),
+      home: const TeamPage(),
     );
   }
 }
@@ -40,9 +40,9 @@ class _TeamPageState extends State<TeamPage> {
       image: 'assets/images/member1.png',
     ),
     const TeamMember(
-      name: 'Member 2',
-      country: 'Spain',
-      hobbies: 'Programming',
+      name: 'Steffen',
+      country: 'Germany',
+      hobbies: 'Football',
       image: 'assets/images/member2.png',
     ),
     const TeamMember(
@@ -94,7 +94,7 @@ class _TeamPageState extends State<TeamPage> {
     final member = members[currentIndex];
 
     return Scaffold(
-      appBar: AppBar(title: Text('Team Profile App')),
+      appBar: AppBar(title: const Text('Team Profile App')),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final orientation = MediaQuery.of(context).orientation;

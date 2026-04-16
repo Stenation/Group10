@@ -41,50 +41,98 @@ class MemberProfileCard extends StatelessWidget {
     );
   }
 
+  List<Widget> _buildInfoChips() {
+    return [
+      Chip(
+        avatar: Icon(Icons.public, size: bodyFontSize),
+        label: Text(member.country, style: TextStyle(fontSize: bodyFontSize)),
+        visualDensity: VisualDensity.compact,
+      ),
+      Chip(
+        avatar: Icon(Icons.interests, size: bodyFontSize),
+        label: Text(member.hobbies, style: TextStyle(fontSize: bodyFontSize)),
+        visualDensity: VisualDensity.compact,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.of(context).orientation;
+
     return Card(
-      elevation: 10,
+      elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: contentPadding,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _buildAvatar(member.image),
-            SizedBox(width: memberSpacing),
-            Expanded(
-              child: Column(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final useVerticalLayout =
+                orientation == Orientation.portrait &&
+                constraints.maxWidth < 500;
+
+            if (useVerticalLayout) {
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    member.name,
-                    style: TextStyle(
-                      fontSize: nameFontSize,
-                      fontWeight: FontWeight.bold,
+                  Center(child: _buildAvatar(member.image)),
+                  SizedBox(height: memberSpacing * 0.6),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      member.name,
+                      style: TextStyle(
+                        fontSize: nameFontSize,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   SizedBox(height: textSpacing + 2),
-                  Text(
-                    'Home country: ${member.country}',
-                    style: TextStyle(
-                      fontSize: bodyFontSize,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  SizedBox(height: textSpacing),
-                  Text(
-                    'Hobbies: ${member.hobbies}',
-                    style: TextStyle(
-                      fontSize: bodyFontSize,
-                      color: Colors.grey[800],
+                  SizedBox(
+                    width: double.infinity,
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: textSpacing,
+                      runSpacing: textSpacing,
+                      children: _buildInfoChips(),
                     ),
                   ),
                 ],
-              ),
-            ),
-          ],
+              );
+            }
+
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _buildAvatar(member.image),
+                SizedBox(width: memberSpacing),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        member.name,
+                        style: TextStyle(
+                          fontSize: nameFontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: textSpacing + 2),
+                      Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: textSpacing,
+                        runSpacing: textSpacing,
+                        children: _buildInfoChips(),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
