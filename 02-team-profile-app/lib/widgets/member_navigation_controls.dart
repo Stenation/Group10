@@ -23,14 +23,14 @@ class MemberNavigationControls extends StatelessWidget {
           onPressed: onPrevious,
           child: Padding(
             padding: buttonPadding,
-            child: Text('←', style: TextStyle(fontSize: fontSize)),
+            child: Icon(Icons.arrow_back, size: fontSize),
           ),
         ),
         ElevatedButton(
           onPressed: onNext,
           child: Padding(
             padding: buttonPadding,
-            child: Text('→', style: TextStyle(fontSize: fontSize)),
+            child: Icon(Icons.arrow_forward, size: fontSize),
           ),
         ),
       ],
