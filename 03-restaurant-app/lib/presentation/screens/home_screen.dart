@@ -7,6 +7,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -22,24 +25,16 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'The Flutter Room',
-                    style: TextStyle(
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                    ),
+                    style: theme.textTheme.headlineLarge,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'Come one, come all,\n'
                     'there is enough code to go around.\n'
                     'Delicious food, and even tastier puns.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black87,
-                      height: 1.4,
-                    ),
+                    style: theme.textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 32),
                   Card(
@@ -51,29 +46,25 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.access_time,
                             size: 28,
-                            color: Colors.deepOrange,
+                            color: colorScheme.primary,
                           ),
                           const SizedBox(width: 16),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Opening Hours',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: theme.textTheme.titleMedium,
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   '6:00 - 22:00',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey.shade700,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ],
@@ -93,29 +84,25 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.location_on,
                             size: 28,
-                            color: Colors.deepOrange,
+                            color: colorScheme.primary,
                           ),
                           const SizedBox(width: 16),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Location',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: theme.textTheme.titleMedium,
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   '123 Flutter Street, Foodville',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey.shade700,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
                                   ),
                                 ),
                               ],
@@ -149,8 +136,6 @@ class HomeScreen extends StatelessWidget {
                           horizontal: 32,
                           vertical: 16,
                         ),
-                        backgroundColor: Colors.deepOrange,
-                        foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
