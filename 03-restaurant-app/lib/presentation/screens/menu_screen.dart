@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:week03/presentation/screens/details_screen.dart';
 
 import '../../data/menu_data.dart';
 
@@ -45,13 +46,11 @@ class MenuScreen extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: () {
-                      // Navigate to the next screen
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (ctx) => ItemDetailScreen(item: item),
-                      //   ),
-                      // );
-                      print('Navigating to ${item.name}');
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (ctx) => DetailsScreen(item: item),
+                        ),
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(14),
