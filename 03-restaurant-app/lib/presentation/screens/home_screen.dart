@@ -18,17 +18,17 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Name',
+              'The Flutter Room',
               style: TextStyle(
-                fontSize: 42,
+                fontSize: 38,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.2,
               ),
             ),
             const SizedBox(height: 16),
             const Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-              'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+              'Come one, come all, there is enough code to go around.'
+              'The Flutter Room offers delicious food, and even tastier puns',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black87,

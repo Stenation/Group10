@@ -6,26 +6,58 @@ const String loremIpsum =
     'Praesent commodo cursus magna, vel scelerisque nisl consectetur et.';
 
 const List<MenuItem> starterItems = [
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
+  MenuItem(
+    name: 'Flutter fries',
+    description: "Fluttiest fries around. Fresh potatoes.",
+    price: 5.0,
+  ),
+  MenuItem(
+    name: 'Backend bread',
+    description: "Fluffy, fluttery bread, yummy.",
+    price: 3.5,
+  ),
+  MenuItem(
+    name: 'Mozzarella sticks of ram',
+    description: "Cheesy deliciousness",
+    price: 4.0,
+  ),
 ];
 
 const List<MenuItem> mainCourseItems = [
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
+  MenuItem(
+    name: 'Pi pizza',
+    description: "Beautiful, round, pizza",
+    price: 10.0,
+  ),
+  MenuItem(
+    name: 'Rubber duck wrap ',
+    description: "Wrapped up duck. Helps with debugging",
+    price: 8.0,
+  ),
+  MenuItem(
+    name: 'Barbe-queue burger',
+    description: "One at time, it's that popular",
+    price: 9.0,
+  ),
 ];
 
 const List<MenuItem> dessertItems = [
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
+  MenuItem(
+    name: 'Ice cream with bits and bites',
+    description: "Smooth, velvety, delicious",
+    price: 5.0,
+  ),
+  MenuItem(
+    name: 'Raspberry pi',
+    description: "Versatile, little piece of deliciousness",
+    price: 6.0,
+  ),
 ];
 
 const List<MenuItem> drinkItems = [
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
-  MenuItem(name: 'name1', description: loremIpsum, price: 5.0),
+  MenuItem(name: 'Water', description: "If you're boring", price: 2.0),
+  MenuItem(name: 'Wine', description: "Cherry wine", price: 6.0),
+  MenuItem(name: 'Beer', description: "Karhu", price: 5.0),
 ];
 
 const List<MenuCategory> menuCategories = [
