@@ -82,6 +82,34 @@ class DetailsScreen extends StatelessWidget {
                       height: 1.5,
                     ),
                   ),
+
+                  const SizedBox(height: 16),
+
+                  Wrap(
+                    spacing: 8,
+                    children: [
+                      if (item.isVegan)
+                        Chip(
+                          label: Text('Vegan'),
+                          backgroundColor: Colors.green.shade200,
+                        ),
+                      if (item.isVegetarian)
+                        Chip(
+                          label: Text('Vegetarian'),
+                          backgroundColor: Colors.green.shade100,
+                        ),
+                      if (item.isGlutenFree)
+                        Chip(
+                          label: Text('GF'),
+                          backgroundColor: Colors.orange.shade100,
+                        ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text('Allergens: ${item.allergens.join(", ")}'),
+                  ),
+
                   const Spacer(),
 
                   SizedBox(
