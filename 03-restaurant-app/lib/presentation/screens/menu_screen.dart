@@ -7,10 +7,13 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu'),
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        backgroundColor: colorScheme.primaryContainer,
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
@@ -25,24 +28,17 @@ class MenuScreen extends StatelessWidget {
                   vertical: 16,
                   horizontal: 8,
                 ),
-                child: Text(
-                  category.name,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
+                child: Text(category.name, style: theme.textTheme.titleLarge),
               ),
               ...category.items.map((item) {
                 return Container(
                   margin: const EdgeInsets.symmetric(
-                    vertical: 5,
+                    vertical: 7,
                     horizontal: 4,
                   ),
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerLow,
+                    color: colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -52,46 +48,36 @@ class MenuScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            item.name,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                          Text(item.name, style: theme.textTheme.titleMedium),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 3,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.deepOrange,
+                              color: colorScheme.primary,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               '€${item.price.toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: colorScheme.onPrimary,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 8),
                       Text(
                         item.description,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey.shade600,
-                          height: 1.4,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
                   ),
                 );
-              }).toList(),
+              }),
               if (categoryIndex != menuCategories.length - 1)
                 const Divider(
                   height: 24,
