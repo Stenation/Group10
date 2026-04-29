@@ -20,11 +20,25 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Movie> _movies = [];
   bool _isLoading = false;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
     _loadAndShow();
+    _searchController.addListener(() {
+      final q = _searchController.text;
+      if (q != _searchQuery) {
+        _performSearch(q);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   void _loadAndShow() async {
@@ -73,12 +87,58 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _performSearch(String q) async {
+    _searchQuery = q;
+    // Query the local database for matching titles (empty query returns all)
+    final results = await DatabaseHelper.instance.searchMovies(q);
+    setState(() {
+      _movies = results;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        // increase height to fit search field below title
+        toolbarHeight: 80,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 40,
+              child: TextField(
+                controller: _searchController,
+                onChanged: (v) => _performSearch(v),
+                style: const TextStyle(color: Colors.black87),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  hintText: 'Search movies by title',
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: const Icon(Icons.search, color: Colors.black54),
+                  suffixIcon: _searchQuery.isNotEmpty
+                      ? IconButton(
+                          icon: const Icon(Icons.clear, color: Colors.black54),
+                          onPressed: () {
+                            _searchController.clear();
+                            _performSearch('');
+                          },
+                        )
+                      : null,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
