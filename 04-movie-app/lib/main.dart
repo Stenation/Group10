@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'movie.dart';
+import 'db/database_helper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,22 +51,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _loadAndShow() async {
     setState(() => _isLoading = true);
-    _movies = await _loadMovies();
+
+    final movies = await _loadMovies();
+    _movies = movies;
+
     setState(() => _isLoading = false);
   }
 
   Future<List<Movie>> _loadMovies() async {
-    final response = await http.get(Uri.parse(widget.movieUri));
-    var returnValue = <Movie>[];
-
-    if (response.statusCode == 200) {
-      final movies = jsonDecode(response.body) as List;
-      returnValue = List.generate(
-        movies.length,
-        (index) => Movie.fromJson(movies[index] as Map<String, dynamic>),
-      );
+    // First try to load movies from the local database
+    final dbMovies = await DatabaseHelper.instance.getAllMovies();
+    if (dbMovies.isNotEmpty) {
+      print('db is not empty, movie data loaded from db');
+      print('Loaded ${dbMovies.length} movies from database.');
+      return dbMovies;
     }
-    return returnValue;
+
+    // If the database is empty, load from API and save into the database
+    try {
+      final response = await http.get(Uri.parse(widget.movieUri));
+
+      if (response.statusCode == 200) {
+        final moviesJson = jsonDecode(response.body) as List;
+        final movies = List.generate(
+          moviesJson.length,
+          (index) => Movie.fromJson(moviesJson[index]),
+        );
+
+        if (movies.isNotEmpty) {
+          await DatabaseHelper.instance.insertMovies(movies);
+          print('movie data downloaded from API and saved to db');
+          print('Saved ${movies.length} movies into database.');
+        }
+
+        return movies;
+      } else {
+        print('failed to load data from API');
+        print('Error: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('failed to load data from API');
+      print('Exception: $e');
+      return [];
+    }
   }
 
   @override
@@ -202,7 +231,7 @@ class MovieDetailScreen extends StatelessWidget {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: movie.images!.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  separatorBuilder: (_, _) => const SizedBox(width: 8),
                   itemBuilder: (context, idx) {
                     final imgUrl = movie.images![idx];
                     return ClipRRect(
@@ -211,7 +240,7 @@ class MovieDetailScreen extends StatelessWidget {
                         imgUrl,
                         width: 120,
                         fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) =>
+                        errorBuilder: (_, _, _) =>
                             const Icon(Icons.broken_image, size: 60),
                       ),
                     );
